@@ -1,14 +1,24 @@
-<h1><%= @restaurant.name %></h1>
-<p><strong>Address: </strong><%= @restaurant.address %></p>
-<p><strong>Phone: </strong><%= @restaurant.phone_number %></p>
-<p><strong>Category: </strong><%= @restaurant.category %></p>
-<%= link_to "List of restaurants", restaurants_path %>
+<div class="details text-center">
+  <h1><%= @restaurant.name %></h1>
+  <p><strong>Address: </strong><%= @restaurant.address %></p>
+  <p><strong>Phone: </strong><%= @restaurant.phone_number %></p>
+  <p><strong>Category: </strong><%= @restaurant.category %></p>
+</div>
 <!-- RATINGS TO GO HERE -->
 <ul>
   <% @restaurant.reviews.each do |review| %>
-    <p><%= review.content %></p>
-    <h6><%= "*" * review.rating %></h6>
+    <li>
+      <p><%= review.content %></p>
+      <% review.rating.times do %>
+        <i class="fas fa-star"></i>
+      <% end %>
+      <% (5 - review.rating).times do %>
+        <i class="fas fa-star feint"></i>
+      <% end %>
+    </li>
   <% end %>
+  <li>
+    <%= link_to "Add a review", new_restaurant_review_path(@restaurant) %>
+  </li>
 </ul>
 
-<%= link_to "Add a review", new_restaurant_review_path(@restaurant) %>

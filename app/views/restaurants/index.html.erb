@@ -1,9 +1,27 @@
-<h1>Restaurants</h1>
-<ul>
+<h1 class="text-center">Restaurants</h1>
+<div class="text-center space-below">
+  <%= link_to "Add a restaurant", new_restaurant_path %>
+</div>
+<div class="row">
   <% @restaurants.each do |restaurant| %>
-    <li>
-      <%= link_to restaurant.name, restaurant_path(restaurant) %>
-    </li>
+    <div class="col-xs-12 col-sm-4">
+      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://media.istockphoto.com/photos/chinese-food-blank-background-picture-id545455948?k=6&m=545455948&s=612x612&w=0&h=mtkFa4qU1yLPJF7LA0kr5mSNXOxyy468GfMD42SONEI=');">
+        <div class="card-category"><%= restaurant.category %></div>
+        <div class="card-description">
+          <h2><%= restaurant.name %>e</h2>
+          <% (average_rating restaurant).times do %>
+            <i class="fas fa-star"></i>
+          <% end %>
+          <% (5 - (average_rating restaurant)).times do %>
+            <i class="fas fa-star feint"></i>
+          <% end %>
+        </div>
+      <%= link_to restaurant_path(restaurant), class: "card-link" do%>
+      <% end %>
+      <!-- <a class="card-link" href="#" ></a> -->
+      </div>
+    </div>
   <% end %>
-</ul>
-<%= link_to "Add a restaurant", new_restaurant_path %>
+</div>
+
+

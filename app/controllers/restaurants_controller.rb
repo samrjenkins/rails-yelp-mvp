@@ -26,4 +26,12 @@ class RestaurantsController < ApplicationController
   def restaurant_params
     params.require(:restaurant).permit(:name, :address, :phone_number, :category)
   end
+
+  def average_rating(restaurant)
+    array = restaurant.reviews.map { |review| review.rating }
+    array.inject(0, :+) / [array.length, 1].max
+  end
+
+  helper_method :average_rating
+
 end
